@@ -237,6 +237,8 @@ type AgentWorkflowBridgeLike = {
       userId?: string
       processId: string
       stepId: string
+      // Optional interpolated business-record descriptor (invokeAgentConfigSchema.subject).
+      subject?: unknown
     }
   }) => Promise<
     | { kind: 'informative'; data: unknown }
@@ -311,6 +313,7 @@ export async function handleInvokeAgentJob(
         userId: payload.userId,
         processId: instance.id,
         stepId: payload.stepId,
+        ...(payload.subject ? { subject: payload.subject } : {}),
       },
     })
   } catch (agentError: any) {
