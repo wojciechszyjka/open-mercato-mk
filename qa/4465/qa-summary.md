@@ -12,7 +12,10 @@
 |---|---|---|---|
 | P0 — quick-add bez konfiguracji (domyślne) | pole Probability = 25, deal zapisany z probability 25 | pole = `25`; API: `probability = 25` | PASS |
 | P1 — użytkownik czyści pole Probability | payload bez `probability`, deal bez wartości | API: `probability = null` | PASS |
-| P2 — override `propsTransform` (`defaultProbability: null`) z `widgets/components.ts` aplikacji | pole puste bez ruszania kodu strony, deal bez probability | (uzupełniane) | (uzupełniane) |
+| P2 — override `propsTransform` (`defaultProbability: null`) z `widgets/components.ts` aplikacji | pole puste bez ruszania kodu strony, deal bez probability | pole puste (widoczne „25" to placeholder); API: `probability = null` | PASS |
+| P2b — przy aktywnym override użytkownik ręcznie wpisuje 70 | wartość trafia do payloadu | pole startowo puste; API: `probability = 70` | PASS |
+
+Override QA wpięty jako `propsTransform` na `dialog:customers.deals.quickDeal` w `apps/mercato/src/modules/example/widgets/components.ts` → `yarn generate` → restart appki. Po testach cofnięty (`git checkout --`), worktree czysty.
 
 ## Zrzuty
 
