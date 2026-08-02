@@ -107,3 +107,8 @@ PR: #4819
 - [x] 3.1 Run the full validation gate — 82deeaf81 (green except three pre-existing/environmental
       `yarn test` clusters, each reproduced independently of this change; detailed in the PR body)
 - [x] 3.2 Open the PR, raise the allowlist question, review and report labels — #4819
+- [x] 3.3 Merge the latest `develop` into the PR head after the first review pass and realign the
+      unit regression test with #4656, which moved base-currency resolution out of the route's SQL
+      so the `executeMock` call indices shifted by one. The same base merge picks up
+      `c9c3ebfee stabilize: reconcile main into develop and fix sales CI (#4826)`, which is what the
+      required `test` check had been failing on.

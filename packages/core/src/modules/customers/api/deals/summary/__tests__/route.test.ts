@@ -331,21 +331,19 @@ describe('customers deals summary route', () => {
     fetchStuckDealIdsMock.mockResolvedValue([stuckDealId])
 
     executeMock
-      // 1) base currency
-      .mockResolvedValueOnce([{ code: 'USD' }])
-      // 2) open pipeline rows
+      // 1) open pipeline rows
       .mockResolvedValueOnce([])
-      // 3) inflow
+      // 2) inflow
       .mockResolvedValueOnce([])
-      // 4) won
+      // 3) won
       .mockResolvedValueOnce([])
-      // 5) win/loss
+      // 4) win/loss
       .mockResolvedValueOnce([{ current_won: '0', current_lost: '0', previous_won: '0', previous_lost: '0' }])
-      // 6) series
+      // 5) series
       .mockResolvedValueOnce([])
-      // 7) overdue
+      // 6) overdue
       .mockResolvedValueOnce([])
-      // 8) open intersection for the stuck ids
+      // 7) open intersection for the stuck ids
       .mockResolvedValueOnce([])
 
     const response = await GET(new Request('http://localhost/api/customers/deals/summary'))
@@ -357,9 +355,9 @@ describe('customers deals summary route', () => {
     // The open-deal queries behind pipelineValue, its stage breakdown, activeDeals and the
     // need-attention stuck intersection: open status allowlist AND no recorded closure outcome.
     const openDealQueries = {
-      'open pipeline aggregation': sqlOf(1),
-      'open inflow delta': sqlOf(2),
-      'need-attention stuck intersection': sqlOf(7),
+      'open pipeline aggregation': sqlOf(0),
+      'open inflow delta': sqlOf(1),
+      'need-attention stuck intersection': sqlOf(6),
     }
     for (const [label, sql] of Object.entries(openDealQueries)) {
       expect({ label, keepsStatusAllowlist: sql.includes('status IN (?,?)') }).toEqual({ label, keepsStatusAllowlist: true })
@@ -371,10 +369,10 @@ describe('customers deals summary route', () => {
     }
 
     // The other half of need-attention: overdue open deals.
-    expect(sqlOf(6)).toContain("status = 'open' AND closure_outcome IS NULL")
+    expect(sqlOf(5)).toContain("status = 'open' AND closure_outcome IS NULL")
 
     // Unchanged counterpart: the won query still treats either column as authoritative, which is
     // what made the contradiction visible in the first place.
-    expect(sqlOf(3)).toContain("(status = 'win' OR closure_outcome = 'won')")
+    expect(sqlOf(2)).toContain("(status = 'win' OR closure_outcome = 'won')")
   })
 })
