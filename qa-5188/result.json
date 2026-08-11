@@ -1,0 +1,42 @@
+{
+  "before": {
+    "n": 2,
+    "hits": [
+      {
+        "tag": "P",
+        "cls": "text-sm text-muted-foreground",
+        "role": null,
+        "text": "Add at least one line item before creating the order."
+      },
+      {
+        "tag": "P",
+        "cls": "mx-auto max-w-sm text-sm text-muted-foreground",
+        "role": null,
+        "text": "Add at least one line item before creating the order."
+      }
+    ]
+  },
+  "after": {
+    "n": 3,
+    "hits": [
+      {
+        "tag": "P",
+        "cls": "text-sm text-muted-foreground",
+        "role": null,
+        "text": "Add at least one line item before creating the order."
+      },
+      {
+        "tag": "P",
+        "cls": "mx-auto max-w-sm text-sm text-muted-foreground",
+        "role": null,
+        "text": "Add at least one line item before creating the order."
+      },
+      {
+        "tag": "DIV",
+        "cls": "text-xs text-status-error-text",
+        "role": null,
+        "text": "Add at least one line item before creating the order."
+      }
+    ]
+  }
+}
